@@ -15,7 +15,7 @@ Requires: mkosi-python3
 Requires: mkosi-python
 BuildRequires : pbr
 BuildRequires : pip
-BuildRequires : python-dev
+
 BuildRequires : python3-dev
 BuildRequires : setuptools
 
