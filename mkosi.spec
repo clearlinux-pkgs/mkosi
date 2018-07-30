@@ -4,7 +4,7 @@
 #
 Name     : mkosi
 Version  : 4
-Release  : 10
+Release  : 11
 URL      : https://github.com/systemd/mkosi/archive/v4.tar.gz
 Source0  : https://github.com/systemd/mkosi/archive/v4.tar.gz
 Summary  : No detailed summary available
@@ -12,12 +12,10 @@ Group    : Development/Tools
 License  : LGPL-2.1
 Requires: mkosi-bin
 Requires: mkosi-python3
+Requires: mkosi-license
 Requires: mkosi-python
-BuildRequires : pbr
-BuildRequires : pip
-
-BuildRequires : python3-dev
-BuildRequires : setuptools
+Requires: bmap-tools-bin
+BuildRequires : buildreq-distutils3
 
 %description
 # mkosi - Create legacy-free OS images
@@ -28,9 +26,18 @@ bells and whistles.
 %package bin
 Summary: bin components for the mkosi package.
 Group: Binaries
+Requires: mkosi-license
 
 %description bin
 bin components for the mkosi package.
+
+
+%package license
+Summary: license components for the mkosi package.
+Group: Default
+
+%description license
+license components for the mkosi package.
 
 
 %package python
@@ -59,11 +66,13 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1518458297
+export SOURCE_DATE_EPOCH=1532992196
 python3 setup.py build -b py3
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/mkosi
+cp LICENSE %{buildroot}/usr/share/doc/mkosi/LICENSE
 python3 -tt setup.py build -b py3 install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -75,6 +84,10 @@ echo ----[ mark ]----
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/mkosi
+
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/mkosi/LICENSE
 
 %files python
 %defattr(-,root,root,-)
