@@ -4,18 +4,19 @@
 #
 Name     : mkosi
 Version  : 4
-Release  : 11
+Release  : 12
 URL      : https://github.com/systemd/mkosi/archive/v4.tar.gz
 Source0  : https://github.com/systemd/mkosi/archive/v4.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
-Requires: mkosi-bin
-Requires: mkosi-python3
-Requires: mkosi-license
-Requires: mkosi-python
+Requires: mkosi-bin = %{version}-%{release}
+Requires: mkosi-license = %{version}-%{release}
+Requires: mkosi-python = %{version}-%{release}
+Requires: mkosi-python3 = %{version}-%{release}
 Requires: bmap-tools-bin
 BuildRequires : buildreq-distutils3
+Patch1: 0001-Allow-to-run-qemu-2.12.patch
 
 %description
 # mkosi - Create legacy-free OS images
@@ -26,7 +27,7 @@ bells and whistles.
 %package bin
 Summary: bin components for the mkosi package.
 Group: Binaries
-Requires: mkosi-license
+Requires: mkosi-license = %{version}-%{release}
 
 %description bin
 bin components for the mkosi package.
@@ -43,7 +44,7 @@ license components for the mkosi package.
 %package python
 Summary: python components for the mkosi package.
 Group: Default
-Requires: mkosi-python3
+Requires: mkosi-python3 = %{version}-%{release}
 
 %description python
 python components for the mkosi package.
@@ -60,20 +61,21 @@ python3 components for the mkosi package.
 
 %prep
 %setup -q -n mkosi-4
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532992196
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1539211651
+python3 setup.py build
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/mkosi
-cp LICENSE %{buildroot}/usr/share/doc/mkosi/LICENSE
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/mkosi
+cp LICENSE %{buildroot}/usr/share/package-licenses/mkosi/LICENSE
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -86,8 +88,8 @@ echo ----[ mark ]----
 /usr/bin/mkosi
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/mkosi/LICENSE
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/mkosi/LICENSE
 
 %files python
 %defattr(-,root,root,-)
