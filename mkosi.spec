@@ -4,7 +4,7 @@
 #
 Name     : mkosi
 Version  : 4
-Release  : 13
+Release  : 14
 URL      : https://github.com/systemd/mkosi/archive/v4.tar.gz
 Source0  : https://github.com/systemd/mkosi/archive/v4.tar.gz
 Summary  : No detailed summary available
