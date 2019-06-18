@@ -4,7 +4,7 @@
 #
 Name     : mkosi
 Version  : 5
-Release  : 15
+Release  : 16
 URL      : https://github.com/systemd/mkosi/archive/v5.tar.gz
 Source0  : https://github.com/systemd/mkosi/archive/v5.tar.gz
 Summary  : No detailed summary available
@@ -16,6 +16,7 @@ Requires: mkosi-python = %{version}-%{release}
 Requires: mkosi-python3 = %{version}-%{release}
 Requires: bmap-tools-bin
 BuildRequires : buildreq-distutils3
+Patch1: 0001-mkosi-provide-default-xbootldr_partno-in-argument-pa.patch
 
 %description
 # mkosi - Create legacy-free OS images
@@ -60,14 +61,19 @@ python3 components for the mkosi package.
 
 %prep
 %setup -q -n mkosi-5
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1556649916
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export SOURCE_DATE_EPOCH=1560878499
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
