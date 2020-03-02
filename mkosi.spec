@@ -4,10 +4,10 @@
 #
 Name     : mkosi
 Version  : 5
-Release  : 19
+Release  : 20
 URL      : https://github.com/systemd/mkosi/archive/v5.tar.gz
 Source0  : https://github.com/systemd/mkosi/archive/v5.tar.gz
-Summary  : No detailed summary available
+Summary  : Build Legacy-Free OS Images
 Group    : Development/Tools
 License  : LGPL-2.1
 Requires: mkosi-bin = %{version}-%{release}
@@ -61,14 +61,16 @@ python3 components for the mkosi package.
 
 %prep
 %setup -q -n mkosi-5
+cd %{_builddir}/mkosi-5
 %patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1560878499
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1583173731
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -81,7 +83,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/mkosi
-cp LICENSE %{buildroot}/usr/share/package-licenses/mkosi/LICENSE
+cp %{_builddir}/mkosi-5/LICENSE %{buildroot}/usr/share/package-licenses/mkosi/01a6b4bf79aca9b556822601186afab86e8c4fbf
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -96,7 +98,7 @@ echo ----[ mark ]----
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/mkosi/LICENSE
+/usr/share/package-licenses/mkosi/01a6b4bf79aca9b556822601186afab86e8c4fbf
 
 %files python
 %defattr(-,root,root,-)
