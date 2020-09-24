@@ -4,7 +4,7 @@
 #
 Name     : mkosi
 Version  : 5
-Release  : 20
+Release  : 21
 URL      : https://github.com/systemd/mkosi/archive/v5.tar.gz
 Source0  : https://github.com/systemd/mkosi/archive/v5.tar.gz
 Summary  : Build Legacy-Free OS Images
