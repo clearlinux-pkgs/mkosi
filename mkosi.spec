@@ -4,7 +4,7 @@
 #
 Name     : mkosi
 Version  : 8
-Release  : 23
+Release  : 24
 URL      : https://github.com/systemd/mkosi/archive/v8/mkosi-8.tar.gz
 Source0  : https://github.com/systemd/mkosi/archive/v8/mkosi-8.tar.gz
 Summary  : No detailed summary available
