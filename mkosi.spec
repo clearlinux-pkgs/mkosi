@@ -4,7 +4,7 @@
 #
 Name     : mkosi
 Version  : 9
-Release  : 27
+Release  : 28
 URL      : https://github.com/systemd/mkosi/archive/v9/mkosi-9.tar.gz
 Source0  : https://github.com/systemd/mkosi/archive/v9/mkosi-9.tar.gz
 Summary  : No detailed summary available
