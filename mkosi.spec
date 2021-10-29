@@ -4,7 +4,7 @@
 #
 Name     : mkosi
 Version  : 10
-Release  : 34
+Release  : 35
 URL      : https://github.com/systemd/mkosi/archive/v10/mkosi-10.tar.gz
 Source0  : https://github.com/systemd/mkosi/archive/v10/mkosi-10.tar.gz
 Summary  : No detailed summary available
