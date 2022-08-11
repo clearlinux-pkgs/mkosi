@@ -4,7 +4,7 @@
 #
 Name     : mkosi
 Version  : 13
-Release  : 39
+Release  : 40
 URL      : https://github.com/systemd/mkosi/archive/v13/mkosi-13.tar.gz
 Source0  : https://github.com/systemd/mkosi/archive/v13/mkosi-13.tar.gz
 Summary  : No detailed summary available
