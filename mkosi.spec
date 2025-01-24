@@ -6,10 +6,10 @@
 # autospec commit: 94c6be0
 #
 Name     : mkosi
-Version  : 25
-Release  : 50
-URL      : https://github.com/systemd/mkosi/archive/v25/mkosi-25.tar.gz
-Source0  : https://github.com/systemd/mkosi/archive/v25/mkosi-25.tar.gz
+Version  : 25.2
+Release  : 51
+URL      : https://github.com/systemd/mkosi/archive/v25.2/mkosi-25.2.tar.gz
+Source0  : https://github.com/systemd/mkosi/archive/v25.2/mkosi-25.2.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
@@ -67,10 +67,10 @@ python3 components for the mkosi package.
 
 
 %prep
-%setup -q -n mkosi-25
-cd %{_builddir}/mkosi-25
+%setup -q -n mkosi-25.2
+cd %{_builddir}/mkosi-25.2
 pushd ..
-cp -a mkosi-25 buildavx2
+cp -a mkosi-25.2 buildavx2
 popd
 
 %build
@@ -78,7 +78,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1737649008
+export SOURCE_DATE_EPOCH=1737731361
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
